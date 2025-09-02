@@ -1,0 +1,112 @@
+<div class="operators-page">
+  <div class="header">
+    <h2>Tour Operator Management</h2>
+    <p>Create or edit tour operators and their assigned booking classes.</p>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="submit()" class="operator-form">
+    <div class="form-grid">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input
+          id="name"
+          type="text"
+          formControlName="name"
+          placeholder="Operator name"
+        />
+        <small *ngIf="form.get('name')?.touched && form.get('name')?.invalid">
+          Name is required.
+        </small>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          placeholder="example@domain.com"
+        />
+        <small *ngIf="form.get('email')?.touched && form.get('email')?.invalid">
+          Valid email is required.
+        </small>
+      </div>
+
+      <div class="form-group" *ngIf="mode === 'create'">
+        <label for="password">Password</label>
+        <input
+          id="password"
+          type="password"
+          formControlName="password"
+          placeholder="Minimum 6 characters"
+        />
+        <small *ngIf="form.get('password')?.touched && form.get('password')?.invalid">
+          Password is required (min 6 characters).
+        </small>
+      </div>
+
+      <div class="form-group">
+        <label>Booking Classes</label>
+        <div class="checkbox-list">
+          <label *ngFor="let cls of allBookingClasses" class="checkbox-item">
+            <input
+              type="checkbox"
+              [checked]="selectedBookingClassIds.includes(cls.id)"
+              (change)="toggleBookingClass(cls.id)"
+            />
+            {{ cls.name }}
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Operating Seasons</label>
+        <div class="checkbox-list">
+          <label *ngFor="let season of allSeasons" class="checkbox-item">
+            <input
+              type="checkbox"
+              [checked]="selectedSeasonIds.includes(season.id)"
+              (change)="toggleSeason(season.id)"
+            />
+            {{ season.name }}
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group buttons">
+ <button
+    type="submit"
+    [disabled]="saving() || (mode === 'create' && isOperator)">
+    {{ mode === 'edit' ? 'Update Operator' : 'Add Operator' }}
+  </button>
+  <button
+    type="button"
+    class="ghost"
+    *ngIf="mode === 'edit'"
+    (click)="resetForm()">
+    Cancel
+  </button>
+      </div>
+    </div>
+  </form>
+
+  <div class="operator-table">
+    <app-table
+      [columnDefs]="columnDefs"
+      [data]="operators"
+      [showActions]="true"
+      (onEdit)="edit($event)"
+      [canDelete]="!isOperator"
+      (onDelete)="isOperator ? null : delete($event)"
+      [emptyMessage]="'No operators available.'"
+    ></app-table>
+
+    <ng-template #empty>
+      <p class="empty-message">No operators available. Add one above.</p>
+    </ng-template>
+  </div>
+
+  <div class="toast" *ngIf="showToast()">
+    {{ toastMessage }}
+  </div>
+</div>

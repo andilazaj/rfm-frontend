@@ -1,0 +1,64 @@
+.app-table {
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+
+    th,
+    td {
+      padding: 10px 14px;
+      border-bottom: 1px solid #e0e0e0;
+      text-align: left;
+    }
+
+    th {
+      background: #f9f9f9;
+      font-weight: 600;
+      font-size: 14px;
+      color: #333;
+    }
+
+    .actions {
+      display: flex;
+      gap: 8px;
+
+      button {
+        padding: 6px 12px;
+        border: none;
+        border-radius: 4px;
+        font-size: 13px;
+        cursor: pointer;
+        transition: background 0.3s ease, color 0.3s ease;
+
+        &:hover {
+          opacity: 0.9;
+        }
+
+        &.danger {
+          background: #ffe5e5;
+          color: #d93025;
+
+          &:hover {
+            background: #ffd6d6;
+          }
+        }
+
+        &:not(.danger) {
+          background: #e0f0ff;
+          color: #0366d6;
+
+          &:hover {
+            background: #cce4fc;
+          }
+        }
+      }
+    }
+  }
+
+  .empty-message {
+    margin-top: 1rem;
+    font-style: italic;
+    color: #888;
+    text-align: center;
+  }
+}

@@ -1,0 +1,19 @@
+<div class="panel-header">
+  <h2>Management Panel</h2>
+  <button class="logout" (click)="logout()">Logout</button>
+</div>
+<nav class="tabs">
+  <button
+    *ngFor="let tab of visibleTabs()"
+    [class.active]="selectedTab === tab.key"
+    (click)="selectedTab = tab.key">
+    {{ tab.label }}
+  </button>
+</nav>
+
+<div class="tab-content">
+  <app-route-management *ngIf="selectedTab === 'routes'"></app-route-management>
+  <app-seasons *ngIf="selectedTab === 'seasons'"></app-seasons>
+    <app-operators *ngIf="selectedTab === 'operators'"></app-operators>
+<app-pricing-table *ngIf="selectedTab === 'pricing'"></app-pricing-table>
+</div>

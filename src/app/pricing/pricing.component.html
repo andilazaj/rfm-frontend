@@ -1,0 +1,99 @@
+<div class="pricing-page">
+  <header class="filters">
+    <div class="field">
+      <label>Route</label>
+      <select
+        [ngModel]="selectedRouteId()"
+        (ngModelChange)="selectedRouteId.set($event)">
+        <option [ngValue]="null" disabled>Choose route</option>
+        <option *ngFor="let r of routes()" [ngValue]="r.id">
+          {{ r.origin }} → {{ r.destination }}
+        </option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>Season</label>
+      <select
+        [ngModel]="selectedSeasonId()"
+        (ngModelChange)="selectedSeasonId.set($event)">
+        <option [ngValue]="null" disabled>Choose season</option>
+        <option *ngFor="let s of seasons()" [ngValue]="s.id">
+          {{ s.name }}
+        </option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>Month</label>
+      <input
+        type="month"
+        [ngModel]="selectedMonth()"
+        (ngModelChange)="selectedMonth.set($event)"
+        [attr.min]="seasonMinMonth()"
+        [attr.max]="seasonMaxMonth()" />
+    </div>
+
+    <div class="spacer"></div>
+
+    <button
+      class="save"
+      *ngIf="isOperator"
+      (click)="saveAll()">
+      Save changes
+    </button>
+    <button class="export" (click)="exportExcel()">Export to Excel</button>
+  </header>
+
+  
+  <div class="table-wrap" *ngIf="selectedRouteId() && selectedSeasonId(); else emptyState">
+    <table class="pricing-table">
+      <thead>
+        <tr>
+          <th class="date">Date</th>
+          <th class="dow">Day</th>
+          <ng-container *ngFor="let cls of bookingClasses()">
+            <th class="price">Price — {{ cls.name }}</th>
+            <th class="seats">Seats — {{ cls.name }}</th>
+          </ng-container>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let d of days()">
+          <td class="date">{{ d.iso }}</td>
+          <td class="dow">{{ d.dayLabel }}</td>
+
+          <ng-container *ngFor="let cls of bookingClasses()">
+            <td class="price">
+              <input
+                type="number"
+                min="0"
+                step="1"
+                [value]="valueFor(d.iso, cls.id, 'price') ?? ''"
+                (input)="onPriceChange(d.iso, cls.id, $event.target.value)"
+                placeholder="0"
+                [disabled]="!isOperator" />
+            </td>
+            <td class="seats">
+              <input
+                type="number"
+                min="0"
+                step="1"
+                [value]="valueFor(d.iso, cls.id, 'seatCount') ?? ''"
+                (input)="onSeatsChange(d.iso, cls.id, $event.target.value)"
+                placeholder="0"
+                [disabled]="!isOperator" />
+            </td>
+          </ng-container>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <ng-template #emptyState>
+    <div class="empty">
+      Choose a <strong>Route</strong> and a <strong>Season</strong> to view the pricing table.
+    </div>
+  </ng-template>
+</div>

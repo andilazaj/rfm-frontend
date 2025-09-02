@@ -1,0 +1,147 @@
+.seasons-page {
+  display: grid;
+  gap: 24px;
+  padding: 20px;
+  width:100%;
+  margin: 0 auto;
+}
+
+.header {
+  h2 {
+    margin: 0;
+    font-size: 24px;
+    color: #111827;
+  }
+
+  p {
+    margin-top: 4px;
+    font-size: 14px;
+    color: #6b7280;
+  }
+}
+
+.season-form {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.form-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+
+  label {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+
+  select {
+    padding: 10px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 14px;
+
+    &:focus {
+      border-color: #111827;
+      outline: none;
+    }
+  }
+
+  &.buttons {
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+
+    button {
+      padding: 10px 16px;
+      font-size: 14px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background: #111827;
+      color: #fff;
+
+      &.ghost {
+        background: transparent;
+        color: #111827;
+        border: 1px solid #111827;
+      }
+    }
+  }
+}
+
+.season-table {
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .actions {
+      display: flex;
+      gap: 8px;
+
+      button {
+        padding: 6px 10px;
+        font-size: 13px;
+        border: 1px solid #d1d5db;
+        border-radius: 6px;
+        background: #fff;
+        cursor: pointer;
+
+        &.danger {
+          color: #b91c1c;
+          background: #fef2f2;
+          border-color: #fca5a5;
+        }
+      }
+    }
+  }
+
+  .empty-message {
+    color: #6b7280;
+    font-size: 14px;
+    padding: 10px 0;
+  }
+}
+
+
+
+.toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ff5252;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  font-size: 14px;
+  z-index: 999;
+  animation: fadein 0.3s ease-in-out;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}

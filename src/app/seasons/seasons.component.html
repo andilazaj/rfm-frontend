@@ -1,0 +1,74 @@
+<div class="seasons-page">
+  
+  <div class="header">
+    <h2>Season Management</h2>
+    <p>Create or update Winter/Summer seasons by year.</p>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="submit()" class="season-form" novalidate>
+    <div class="form-grid">
+     
+      <div class="form-group">
+        <label for="year">Year</label>
+        <select id="year" formControlName="year">
+          <option *ngFor="let y of years" [value]="y">{{ y }}</option>
+        </select>
+      </div>
+
+     
+      <div class="form-group">
+        <label for="type">Season</label>
+        <select id="type" formControlName="type">
+          <option *ngFor="let t of seasonTypes" [value]="t">{{ t }}</option>
+        </select>
+      </div>
+
+     
+      <div class="form-group buttons">
+        <button type="submit" [disabled]="form.invalid || saving()">
+          {{ mode === 'edit' ? 'Update Season' : 'Add Season' }}
+        </button>
+        <button type="button" class="ghost" *ngIf="mode === 'edit'" (click)="cancelEdit()">Cancel</button>
+      </div>
+    </div>
+
+    
+    <div class="preview">
+      <p><strong>Name:</strong> {{ derived.name }}</p>
+      <p><strong>Start Date:</strong> {{ derived.start }}</p>
+      <p><strong>End Date:</strong> {{ derived.end }}</p>
+    </div>
+  </form>
+
+  
+  <div class="season-table">
+    <table *ngIf="seasons.length; else empty">
+      <thead>
+        <tr>
+          <th>Season</th>
+          <th>Year</th>
+          <th class="actions-col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let s of seasons">
+          <td>{{ s.name }}</td>
+          <td>{{ s.year }}</td>
+          <td class="actions">
+            <button type="button" (click)="edit(s)">Edit</button>
+            <button type="button" class="danger" (click)="delete(s)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <ng-template #empty>
+      <p class="empty-message">No seasons yet. Add one above.</p>
+    </ng-template>
+  </div>
+
+  
+  <div class="toast" *ngIf="showToast()">
+    {{ toastMessage }}
+  </div>
+</div>

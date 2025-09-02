@@ -1,0 +1,106 @@
+<div class="header">
+  <h3>Route Management</h3>
+ <button *ngIf="!isOperator" (click)="openCreateModal()">➕ Add Route</button>
+</div>
+
+
+<table class="routes-table">
+  <thead>
+    <tr>
+      <th>Origin</th>
+      <th>Destination</th>
+      <th>Booking Classes</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let route of routes">
+      <td>{{ route.origin }}</td>
+      <td>{{ route.destination }}</td>
+<td>{{ getBookingClassNames(route) }}</td>
+  <td>
+  <div class="action-buttons">
+    <button (click)="openEditModal(route)">✏️ Edit</button>
+    <button *ngIf="!isOperator" (click)="deleteRoute(route.id!)">🗑️ Delete</button>
+  </div>
+</td>
+    </tr>
+  </tbody>
+</table>
+<!-- Modal -->
+<!-- Modal -->
+<div class="modal" *ngIf="showModal">
+  <div class="modal-content">
+    <h4>{{ isEditing ? 'Edit Route' : 'Create Route' }}</h4>
+    <form (ngSubmit)="saveRoute()">
+      <label>
+        Origin:
+        <input
+          [(ngModel)]="currentRoute.origin"
+          name="origin"
+          required
+          [disabled]="isOperator"
+        />
+      </label>
+
+      <label>
+        Destination:
+        <input
+          [(ngModel)]="currentRoute.destination"
+          name="destination"
+          required
+          [disabled]="isOperator"
+        />
+      </label>
+
+      <label for="bookingClasses">Booking Classes:</label>
+      <select
+        id="bookingClasses"
+        multiple
+        [(ngModel)]="currentRoute.bookingClasses"
+        name="bookingClasses"
+        required
+        [disabled]="isOperator"
+      >
+        <option *ngFor="let cls of allBookingClasses" [ngValue]="cls">
+          {{ cls.name }}
+        </option>
+      </select>
+
+      <label>
+        Year:
+        <select
+          [(ngModel)]="selectedYear"
+          (ngModelChange)="filterSeasonsByYear()"
+          name="selectedYear"
+          [ngModelOptions]="{ standalone: true }"
+        >
+          <option [ngValue]="null">All years</option>
+          <option *ngFor="let year of allYears" [ngValue]="year">
+            {{ year }}
+          </option>
+        </select>
+      </label>
+
+      <label>
+        Season:
+        <select
+          [(ngModel)]="currentRoute.seasonId"
+          name="seasonId"
+          [ngModelOptions]="{ standalone: true }"
+          required
+        >
+          <option [ngValue]="null" disabled>Choose a season</option>
+          <option *ngFor="let season of filteredSeasons" [ngValue]="season.id">
+            {{ season.name }}
+          </option>
+        </select>
+      </label>
+
+      <div class="actions">
+        <button type="submit" >{{ isEditing ? 'Update' : 'Create' }}</button>
+        <button type="button" (click)="showModal = false">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>

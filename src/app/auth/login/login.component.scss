@@ -1,0 +1,271 @@
+$bg-start: #0f172a;          // slate-900
+$bg-end:   #1f2937;          // slate-800
+$text:     #e5e7eb;          // slate-200
+$muted:    #9ca3af;          // slate-400
+$border:   rgba(255, 255, 255, .14);
+$panel:    rgba(255, 255, 255, .06);
+$focus:    #60a5fa;          
+$brandA:   #2563eb;          
+$brandB:   #0891b2;       
+$error:    #ef4444;          
+
+/* ---------- Utilities ---------- */
+@mixin focus-ring($c: $focus, $w: 3px, $a: .22) {
+  outline: none;
+  box-shadow: 0 0 0 $w rgba($c, $a);
+  border-color: $c;
+}
+
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+.auth-page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  color: $text;
+  background: radial-gradient(1200px 600px at 20% 0%, rgba(255,255,255,.05), transparent 60%),
+              linear-gradient(135deg, $bg-start, $bg-end);
+
+
+  .card {
+    width: 100%;
+    max-width: 420px;
+    border: 1px solid $border;
+    background: $panel;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 28px;
+    box-shadow: 0 12px 35px rgba(0,0,0,.35);
+    animation: cardIn .25s ease;
+
+ 
+    --inset-x: 12px;
+
+    .brand {
+      text-align: center;
+      margin-bottom: 18px;
+
+      .logo {
+        width: 44px; height: 44px;
+        margin: 0 auto 10px;
+        display: grid; place-items: center;
+        border-radius: 12px;
+        background: rgba(255,255,255,.10);
+        border: 1px solid $border;
+        font-size: 18px;
+      }
+
+      h1 {
+        margin: 0 0 4px;
+        font-size: 1.35rem;
+        font-weight: 600;
+        letter-spacing: .2px;
+      }
+
+      .sub {
+        margin: 0;
+        color: $muted;
+        font-size: .92rem;
+      }
+    }
+  }
+
+  
+  form {
+    display: grid;
+    gap: 14px;
+  }
+
+  
+  .field,
+  .password,
+  .row.between,
+  .btn {
+    width: calc(100% - (var(--inset-x) * 2));
+    margin-inline: var(--inset-x);
+  }
+
+  .field {
+    display: grid;
+    gap: 6px;
+
+    label {
+      font-size: .9rem;
+      color: $muted;
+    }
+
+    input {
+      height: 44px;
+      padding: 0 14px;
+      border-radius: 12px;
+      border: 1px solid $border;
+      background: rgba(255,255,255,.08);
+      color: $text;
+      width: 100%;
+      transition: border .15s ease, box-shadow .15s ease, background .15s ease;
+
+      &::placeholder { color: rgba($text, .6); }
+
+      &:focus-visible {
+        @include focus-ring();
+        background: rgba(255,255,255,.10);
+      }
+    }
+
+    small {
+      color: $error;
+      font-size: .8rem;
+    }
+
+    &.invalid input {
+      border-color: $error;
+      box-shadow: 0 0 0 2px rgba($error, .25);
+    }
+  }
+
+ 
+  .password {
+    .pass-wrap {
+      display: flex;
+      width: 100%;
+      min-width: 0;
+    }
+
+    input {
+      flex: 1 1 auto;
+      min-width: 0;
+      height: 44px;
+      padding: 0 14px;
+      border: 1px solid $border;
+      border-right: 0;
+      border-top-left-radius: 12px;
+      border-bottom-left-radius: 12px;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      background: rgba(255,255,255,.08);
+      color: $text;
+
+      &:focus-visible {
+        @include focus-ring();
+        background: rgba(255,255,255,.10);
+      }
+    }
+
+    .ghost {
+      flex: 0 0 auto;
+      height: 44px;
+      padding: 0 14px;
+      border: 1px solid $border;
+      border-left: 0;
+      border-top-right-radius: 12px;
+      border-bottom-right-radius: 12px;
+      background: radial-gradient(1200px 600px at 20% 0%, rgba(255,255,255,.05), transparent 60%),
+                  linear-gradient(135deg, $bg-start, $bg-end);
+      color: $text;
+      font-size: .9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background .15s ease, border-color .15s ease, transform .05s ease;
+
+      &:hover { background: rgba(255,255,255,.12); }
+      &:active { transform: translateY(1px); }
+      &:focus-visible { @include focus-ring($focus, 3px, .18); }
+    }
+  }
+
+  
+  .row.between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+
+    .checkbox {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+
+      input[type="checkbox"] {
+        width: 16px;
+        height: 16px;
+        accent-color: $focus;
+      }
+
+      span { color: $text; font-size: .92rem; }
+    }
+
+    .link {
+      color: $text;
+      opacity: .85;
+      text-decoration: none;
+      font-size: .92rem;
+      transition: opacity .15s ease, text-decoration-color .15s ease;
+
+      &:hover {
+        opacity: 1;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+      &:focus-visible { @include focus-ring($focus, 3px, .16); }
+    }
+  }
+
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    padding: 12px 16px;
+    border: 0;
+    border-radius: 12px;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    background: linear-gradient(135deg, $brandA, $brandB);
+    box-shadow: 0 8px 20px rgba(0,0,0,.25);
+    transition: filter .2s ease, transform .05s ease, box-shadow .2s ease;
+
+    &:hover { filter: brightness(1.05); }
+    &:active { transform: translateY(1px); }
+    &:focus-visible { @include focus-ring($focus, 3px, .18); }
+
+    &:disabled {
+      cursor: not-allowed;
+      filter: grayscale(.2);
+      opacity: .85;
+      box-shadow: 0 6px 16px rgba(0,0,0,.2);
+    }
+  }
+
+  .alt {
+    margin-top: 14px;
+    text-align: center;
+    color: $muted;
+    font-size: .92rem;
+
+    .link {
+      color: $text;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      &:focus-visible { @include focus-ring($focus, 3px, .16); }
+    }
+  }
+
+  @keyframes cardIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+
+  @media (max-width: 380px) {
+    .card { padding: 22px; }
+    .password .pass-wrap .ghost { height: 40px; }
+  }
+}

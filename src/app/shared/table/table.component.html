@@ -1,0 +1,26 @@
+<div class="app-table">
+  <table *ngIf="data.length; else noData">
+    <thead>
+      <tr>
+        <th *ngFor="let col of columnDefs">{{ col.label }}</th>
+        <th *ngIf="showActions"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of data">
+       <td *ngFor="let col of columnDefs">
+  {{ col.transform ? col.transform(row[col.key]) : formatValue(row[col.key]) }}
+</td>
+        <td *ngIf="showActions" class="actions">
+          <button (click)="handleEdit(row)">Edit</button>
+<button   *ngIf="canDelete"
+ (click)="handleDelete(row)" class="danger">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ng-template #noData>
+    <p class="empty-message">{{ emptyMessage }}</p>
+  </ng-template>
+</div>

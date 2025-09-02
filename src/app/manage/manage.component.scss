@@ -1,0 +1,36 @@
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logout {
+  background-color: #ef4444;
+  color: white;
+  border: none;
+  padding: 0.4rem 1rem;
+  margin-right:5%;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.tabs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  margin:10px
+}
+.tabs button {
+  padding: 0.5rem 1rem;
+  border: none;
+  background: #eee;
+  cursor: pointer;
+}
+.tabs button.active {
+  background: #333;
+  color: #fff;
+}
+.tab-content {
+  padding: 1rem;
+  border: 1px solid #ccc;
+}
