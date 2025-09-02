@@ -2,6 +2,26 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.2.0.
 
+## Deployments
+
+- **Frontend (Angular)**: [https://rfm-frontend-flame.vercel.app/]
+  Deployed on [Vercel](https://vercel.com/).  
+  Each push to the `main` branch triggers an automatic deployment.
+
+- **Backend (ASP.NET Core API)**: [https://rfm-frontend-flame.vercel.app/]
+  Each push to the `main` branch need a manual deployment of the last commit.
+  Deployed on [Render](https://render.com/)
+
+### Test Credentials
+
+- **Admin Login**  
+  Email: `admin@rfm.com`  
+  Password: `Admin123$`
+
+- **Operator Login**  
+  Email: `operator@gmail.com`  
+  Password: `Operator@123`
+
 ## Development server
 
 To start a local development server, run:
