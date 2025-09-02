@@ -22,6 +22,15 @@ This project was generated using [Angular CLI](https://github.com/angular/angula
   Email: `operator@gmail.com`  
   Password: `Operator@123`
 
+  ### Steps
+
+  1- Login as admin
+  2- Create Seasons
+  3- Create Routes
+  4- Create Operators
+  5- Login as Operator
+  6- Manage Prices
+
 ## Development server
 
 To start a local development server, run:
