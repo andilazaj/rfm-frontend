@@ -40,8 +40,7 @@
         <select id="role" formControlName="role">
           <option value="" disabled selected>Select your role</option>
           <option value="admin">Admin</option>
-          <option value="operator">Operator</option>
-          <option value="user">User</option>
+        
         </select>
         <small *ngIf="f['role'].touched && f['role'].errors?.['required']">Role is required</small>
       </div>
