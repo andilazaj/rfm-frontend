@@ -8,7 +8,7 @@ This project was generated using [Angular CLI](https://github.com/angular/angula
   Deployed on [Vercel](https://vercel.com/).  
   Each push to the `main` branch triggers an automatic deployment.
 
-- **Backend (ASP.NET Core API)**: [https://rfm-frontend-flame.vercel.app/]
+- **Backend (ASP.NET Core API)**: [https://rfm-backend-zijb.onrender.com/]
   Each push to the `main` branch need a manual deployment of the last commit.
   Deployed on [Render](https://render.com/)
 
