@@ -184,7 +184,7 @@ export class OperatorsComponent implements OnInit {
     }
 
     this.saving.set(true);
-
+    console.log('modee', this.mode);
     if (this.mode === 'edit' && this.editId) {
       this.operatorSvc.update(this.editId, dto).subscribe({
         next: () => {
