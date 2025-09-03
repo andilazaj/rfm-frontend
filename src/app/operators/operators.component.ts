@@ -164,11 +164,12 @@ export class OperatorsComponent implements OnInit {
   }
 
   onSubmit(): void {
+    console.log('modee');
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
     }
-    console.log('modee', this.mode);
+
     const { name, email, password } = this.form.value;
 
     const dto: any = {
