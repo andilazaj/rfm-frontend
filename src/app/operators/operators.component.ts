@@ -163,7 +163,7 @@ export class OperatorsComponent implements OnInit {
     });
   }
 
-  submit(): void {
+  onSubmit(): void {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
