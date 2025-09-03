@@ -168,7 +168,7 @@ export class OperatorsComponent implements OnInit {
       this.form.markAllAsTouched();
       return;
     }
-
+    console.log('modee', this.mode);
     const { name, email, password } = this.form.value;
 
     const dto: any = {
@@ -184,7 +184,7 @@ export class OperatorsComponent implements OnInit {
     }
 
     this.saving.set(true);
-    console.log('modee', this.mode);
+
     if (this.mode === 'edit' && this.editId) {
       this.operatorSvc.update(this.editId, dto).subscribe({
         next: () => {
