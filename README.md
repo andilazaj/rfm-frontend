@@ -12,6 +12,10 @@ This project was generated using [Angular CLI](https://github.com/angular/angula
   Each push to the `main` branch need a manual deployment of the last commit.
   Deployed on [Render](https://render.com/)
 
+  ⚠️ **Important:**  
+  The backend is currently using **SQLite** as the database. On Render, the container filesystem is **ephemeral**, so **data is lost after redeployments or restarts**.  
+  To ensure the demo always works, an **Admin** and **Operator** user are seeded automatically.
+
 ### Test Credentials
 
 - **Admin Login**  
